@@ -6,7 +6,7 @@
 #    By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:23:52 by bfaure            #+#    #+#              #
-#    Updated: 2023/02/22 18:21:15 by bfaure           ###   ########lyon.fr    #
+#    Updated: 2023/02/22 23:13:27 by bfaure           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS = ft_isalpha.c\
 	ft_calloc.c\
 	ft_strdup.c\
 	ft_substr.c\
+	ft_strfjoin.c\
 	ft_strjoin.c\
 	ft_strtrim.c\
 	ft_split.c\

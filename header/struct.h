@@ -6,7 +6,7 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:29:09 by bfaure            #+#    #+#             */
-/*   Updated: 2023/02/22 15:28:24 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/02/22 23:29:18 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ typedef struct s_data
 {
 	char	*path;
 	char	**paths;
+	char	**valid_paths;
 }	t_data;
 
 #endif

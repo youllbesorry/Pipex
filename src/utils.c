@@ -6,7 +6,7 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:03:43 by bfaure            #+#    #+#             */
-/*   Updated: 2023/02/22 18:18:08 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 17:29:34 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	free_tab(char **tab)
 	size_t	i;
 
 	i = 0;
+	ft_printf("free_tab\n");
 	while (tab[i])
 	{
 		free(tab[i]);
@@ -31,8 +32,10 @@ void	free_tab_error(char **tab, size_t len)
 	size_t	i;
 
 	i = 0;
+	ft_printf("free_tab_error\n");
 	while (i < len)
 	{
+		ft_printf("%s\n", tab[i]);
 		free(tab[i]);
 		i++;
 	}

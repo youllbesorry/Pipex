@@ -6,45 +6,51 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:11:04 by bfaure            #+#    #+#             */
-/*   Updated: 2023/02/27 21:17:28 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/02/28 23:17:35 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/pipex.h"
 
-void	get_valid_path(char **argv, t_data *data, size_t len)
+size_t	get_valid_paths(char **argv, t_data *data, size_t i, size_t j)
+{
+	static size_t	k = 0;
+	char			*pathname;
+
+	pathname = ft_strjoin(data->paths[i], argv[j]);
+	if (!pathname)
+		return (0);
+	if (access(pathname, F_OK) == 0)
+	{
+		data->valid_paths[k] = ft_strjoin(data->paths[i], argv[j]);
+		if (!data->valid_paths[k])
+			return (free_tab_error(data->valid_paths, k), 0);
+		ft_printf("valid_path[%i] = %s\n", k, data->valid_paths[k]);
+		k++;
+	}
+	free(pathname);
+	return (k);
+}
+
+void	loop_on_paths(char **argv, t_data *data)
 {
 	size_t	i;
 	size_t	j;
 	size_t	k;
-	char	*pathname;
 
 	i = 0;
 	k = 0;
-	data->valid_paths = malloc((sizeof(char *)) * (len + 1));
-	if (!data->valid_paths)
-		return ;
 	while (data->paths[i])
 	{
 		j = 1;
 		while (argv[j])
 		{
-			pathname = ft_strjoin(data->paths[i], argv[j]);
-			if (access(pathname, F_OK) == 0)
-			{
-				data->valid_paths[k] = ft_strjoin(data->paths[i], argv[j]);
-				if (!data->valid_paths[k])
-					return (free_tab_error(data->valid_paths, k));
-				ft_printf("valide_path[%i] = %s\n", k, data->valid_paths[k]);
-				k++;
-			}
-			free(pathname);
+			k = get_valid_paths(argv, data, i, j);
 			j++;
 		}
 		i++;
 	}
 	data->valid_paths[k] = "\0";
-	ft_printf("get_valid_path OK\n");
 	return ;
 }
 
@@ -70,8 +76,10 @@ int	get_valid_path_memory(char **argv, t_data *data)
 		}
 		i++;
 	}
+	data->valid_paths = malloc((sizeof(char *)) * (k + 1));
+	if (!data->valid_paths)
+		return (0);
 	data->v_paths_len = k;
-	ft_printf("get_valid_path_memory OK\n");
 	return (data->v_paths_len);
 }
 
@@ -91,11 +99,9 @@ void	get_cmb_path(t_data *data)
 			data->paths[i] = ft_strfjoin(data->paths[i], "/");
 			if (!data->paths[i])
 				return (free_tab_error(data->paths, nb_line));
-			ft_printf("data->paths[%i] = %s\n", i, data->paths[i]);
 		}
 		i++;
 	}
-	ft_printf("get_cmp_path OK\n");
 	return ;
 }
 
@@ -120,7 +126,7 @@ void	get_path(char **env, char **argv, t_data *data)
 	get_cmb_path(data);
 	if (get_valid_path_memory(argv, data) == 0)
 		return ;
-	get_valid_path(argv, data, data->v_paths_len);
+	loop_on_paths(argv, data);
 	if (!data->valid_paths)
 		return ;
 	ft_printf("Paths OK\n");

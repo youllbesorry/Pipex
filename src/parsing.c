@@ -6,7 +6,7 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:11:04 by bfaure            #+#    #+#             */
-/*   Updated: 2023/02/28 23:17:35 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 17:08:43 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,34 @@ size_t	get_valid_paths(char **argv, t_data *data, size_t i, size_t j)
 {
 	static size_t	k = 0;
 	char			*pathname;
+	char			**cmd;
 
-	pathname = ft_strjoin(data->paths[i], argv[j]);
+	if (ft_strchr(argv[j], ' ') != NULL)
+	{
+		cmd = ft_split(argv[j], ' ');
+		ft_printf("argv = %s\n", argv[j]);
+		if (!cmd)
+			return (0);
+		pathname = ft_strjoin(data->paths[i], cmd[0]);
+		if (!pathname)
+			return (0);
+		free_tab(cmd);
+	}
+	else
+		pathname = ft_strjoin(data->paths[i], argv[j]);
 	if (!pathname)
 		return (0);
 	if (access(pathname, F_OK) == 0)
 	{
-		data->valid_paths[k] = ft_strjoin(data->paths[i], argv[j]);
+		ft_printf("k = %i\n", k);
+		data->valid_paths[k] = ft_strdup(pathname);
 		if (!data->valid_paths[k])
 			return (free_tab_error(data->valid_paths, k), 0);
 		ft_printf("valid_path[%i] = %s\n", k, data->valid_paths[k]);
+		data->arg[k] = ft_strdup(argv[j]);
+		if (!data->arg[k])
+			return (free_tab_error(data->arg, k), 0);
+		ft_printf("arg[%i] = %s\n", k, data->arg[k]);
 		k++;
 	}
 	free(pathname);
@@ -40,6 +58,9 @@ void	loop_on_paths(char **argv, t_data *data)
 
 	i = 0;
 	k = 0;
+	data->arg = malloc((sizeof(char *)) * (data->v_paths_len + 1));
+	if (!data->arg)
+		return ;
 	while (data->paths[i])
 	{
 		j = 1;

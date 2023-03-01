@@ -6,7 +6,7 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 11:40:52 by bfaure            #+#    #+#             */
-/*   Updated: 2023/02/28 19:03:19 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 15:32:36 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 void	get_path(char **env, char **argv, t_data *data);
 void	free_tab_error(char **tab, size_t len);
-int		test_exec(t_data data, char **argv, int argc);
+//int		test_exec(t_data data, char **argv, int argc);
 void	free_tab(char **tab);
 void	get_cmb_path(t_data *data);
 int		get_valid_path_memory(char **argv, t_data *data);

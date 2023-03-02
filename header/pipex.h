@@ -6,11 +6,11 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 11:40:52 by bfaure            #+#    #+#             */
-/*   Updated: 2023/03/01 15:32:36 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 17:08:35 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	PIPEX_H
+#ifndef PIPEX_H
 # define PIPEX_H
 
 # include "struct.h"
@@ -25,10 +25,9 @@
 
 void	get_path(char **env, char **argv, t_data *data);
 void	free_tab_error(char **tab, size_t len);
-//int		test_exec(t_data data, char **argv, int argc);
 void	free_tab(char **tab);
+int		exec(t_data *data, char **cmd);
 void	get_cmb_path(t_data *data);
-int		get_valid_path_memory(char **argv, t_data *data);
 void	loop_on_paths(char **argv, t_data *data);
 
 #endif

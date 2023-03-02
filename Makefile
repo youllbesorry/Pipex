@@ -6,7 +6,7 @@
 #    By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/22 10:53:15 by bfaure            #+#    #+#              #
-#    Updated: 2023/03/01 15:32:42 by bfaure           ###   ########lyon.fr    #
+#    Updated: 2023/03/02 16:54:19 by bfaure           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ HEAD			=	header/pipex.h\
 SRCS			=	main.c\
 					parsing.c\
 					utils.c\
+					exec.c\
 
 OBJS = ${SRCS:%.c=${DIR_OBJS}%.o}
 

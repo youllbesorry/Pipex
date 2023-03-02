@@ -10,15 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../header/pipex.h"
-# include <unistd.h>
-# include <stdio.h>
+#include "../header/pipex.h"
 
-int	main(int argc, char **argv, char **env)
+int	exec(t_data *data, char **cmd)
 {
-	(void)argc;
-
-	if (execve("/usr/bin/ls", argv, env) == -1)
+	if (execve(data->valid_paths, cmd, data->env) == -1)
 		perror("Could not execve");
 	return (0);
 }

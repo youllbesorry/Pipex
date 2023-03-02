@@ -6,7 +6,7 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 11:40:52 by bfaure            #+#    #+#             */
-/*   Updated: 2023/03/02 17:08:35 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 21:25:14 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PIPEX_H
 
 # include "struct.h"
+# include "sys/wait.h"
 # include <fcntl.h>
 # include <errno.h>
 # include <unistd.h>

@@ -6,13 +6,13 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:11:04 by bfaure            #+#    #+#             */
-/*   Updated: 2023/03/02 16:59:01 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 21:39:18 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/pipex.h"
 
-size_t	get_valid_paths(char **argv, t_data *data, size_t i, size_t j)
+void	get_valid_paths(char **argv, t_data *data, size_t i, size_t j)
 {
 	static int	k = 0;
 	char		*pathname;
@@ -20,22 +20,23 @@ size_t	get_valid_paths(char **argv, t_data *data, size_t i, size_t j)
 
 	cmd = ft_split(argv[j], ' ');
 	if (!cmd)
-		return (0);
+		return ;
 	pathname = ft_strjoin(data->paths[i], cmd[0]);
 	if (!pathname)
-		return (0);
+		return ;
 	if (access(pathname, F_OK) == 0 && k < 2)
 	{
 		data->valid_paths = ft_strdup(pathname);
 		if (!data->valid_paths)
-			return (0);
+			return ;
 		ft_printf("valid_path = %s\n", data->valid_paths);
 		exec(data, cmd);
 		free(data->valid_paths);
 		k++;
 	}
+	free_tab(cmd);
 	free(pathname);
-	return (k);
+	return ;
 }
 
 void	loop_on_paths(char **argv, t_data *data)

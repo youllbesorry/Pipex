@@ -14,7 +14,15 @@
 
 int	exec(t_data *data, char **cmd)
 {
-	if (execve(data->valid_paths, cmd, data->env) == -1)
-		perror("Could not execve");
+	int	id;
+
+	id = fork();
+	if (id == 0)
+	{
+		if (execve(data->valid_paths, cmd, data->env) == -1)
+			perror("Could not execve\n");
+	}
+	else
+		wait(NULL);
 	return (0);
 }

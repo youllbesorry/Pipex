@@ -6,7 +6,7 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:03:43 by bfaure            #+#    #+#             */
-/*   Updated: 2023/02/28 20:19:14 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 21:39:56 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	free_tab(char **tab)
 		i++;
 	}
 	free(tab);
-	ft_printf("free_tab OK\n");
 	return ;
 }
 
@@ -39,6 +38,5 @@ void	free_tab_error(char **tab, size_t len)
 	}
 	if (len != 0)
 		free(tab);
-	ft_printf("free_tab_error OK\n");
 	return ;
 }

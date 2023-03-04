@@ -6,11 +6,38 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:11:04 by bfaure            #+#    #+#             */
-/*   Updated: 2023/03/02 21:39:18 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/03/04 13:25:54 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/pipex.h"
+
+
+char	**add_infile_content(char **argv, char **cmd, size_t j)
+{
+	static size_t	i = 0;
+	char			*launch_arg;
+	char			*save;
+	char			*line;
+	int				fd;
+
+	if (i == 0)
+	{
+		fd = open(argv[1], O_RDONLY);
+		line = get_next_line(fd);
+		save = ft_strjoin(" ", line);
+		launch_arg = ft_strjoin(argv[j], save);
+		ft_printf("launch_arg = %s\n", launch_arg);
+		free_tab(cmd);
+		cmd = ft_split(launch_arg, ' ');
+		i = 1;
+		free(line);
+		free(save);
+		free(launch_arg);
+		return (cmd);
+	}
+	return (cmd);
+}
 
 void	get_valid_paths(char **argv, t_data *data, size_t i, size_t j)
 {
@@ -30,6 +57,7 @@ void	get_valid_paths(char **argv, t_data *data, size_t i, size_t j)
 		if (!data->valid_paths)
 			return ;
 		ft_printf("valid_path = %s\n", data->valid_paths);
+		cmd = add_infile_content(argv, cmd, j);
 		exec(data, cmd);
 		free(data->valid_paths);
 		k++;

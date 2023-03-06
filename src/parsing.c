@@ -6,7 +6,7 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:11:04 by bfaure            #+#    #+#             */
-/*   Updated: 2023/03/04 13:25:54 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/03/06 17:00:01 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ char	**add_infile_content(char **argv, char **cmd, size_t j)
 	if (i == 0)
 	{
 		fd = open(argv[1], O_RDONLY);
+		if (fd == -1)
+			return (cmd);
 		line = get_next_line(fd);
+		if (!line)
+			return (cmd);
 		save = ft_strjoin(" ", line);
 		launch_arg = ft_strjoin(argv[j], save);
 		ft_printf("launch_arg = %s\n", launch_arg);
@@ -83,6 +87,7 @@ void	loop_on_paths(char **argv, t_data *data)
 		}
 		i++;
 	}
+	wait(NULL);
 	return ;
 }
 

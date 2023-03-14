@@ -6,7 +6,7 @@
 #    By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/22 10:53:15 by bfaure            #+#    #+#              #
-#    Updated: 2023/03/04 11:27:20 by bfaure           ###   ########lyon.fr    #
+#    Updated: 2023/03/14 11:09:52 by bfaure           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ DIR_OBJS	=	.objs/
 DIR_SRCS	=	src/
 
 DIR_LIBFT	=	Libft/
+
+LIBFT_A = $(DIR_LIBFT)$(LIBFT)
 
 # ---- Files ---- #
 
@@ -49,30 +51,24 @@ MKDIR	=	mkdir -p
 
 # ********* RULES ******** #
 
-all		:	
-	@ ${MAKE} libs -j4
-	@ ${MAKE} ${NAME} -j4
+	
+all		:	$(NAME)
 
-libs	:
-	@ ${MAKE} ${LIBFT} -C ${DIR_LIBFT}
+$(LIBFT_A):	force
+	@ ${MAKE} ${LIBFT} -C ${DIR_LIBFT} -j4
 
-.PHONY:	all clean fclean re fclean_lib fclean_all
+.PHONY:	all clean fclean re fclean_lib fclean_all force
 
 # ---- Variables Rules ---- #
 
 ${NAME}	:	${OBJS}
 			${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L${DIR_LIBFT} -lft
 
-${addprefix ${DIR_LIBFT}, ${LIBFT}}	:
-	@ $(MAKE) ${LIBFT} -C ${DIR_LIBFT}
-
 # ---- Compiled Rules ---- #
 
-${DIR_OBJS}%.o	:	${DIR_SRCS}%.c ${HEAD} ./Libft/headers/ft_printf.h ./Libft/headers/get_next_line.h ./Libft/headers/libft.h | ${DIR_OBJS}
-					${CC} ${CFLAGS} -I ${addprefix ${DIR_LIBFT}, headers/} -I. -c $< -o $@
-
-${DIR_OBJS}		:
-					${MKDIR} ${DIR_OBJS}
+${DIR_OBJS}%.o	:	${DIR_SRCS}%.c ${HEAD} $(LIBFT_A)
+					@${MKDIR} ${DIR_OBJS}
+					${CC} ${CFLAGS} -I $(DIR_LIBFT) -I. -c $< -o $@		
 
 # ---- Usual Commands ---- #
 

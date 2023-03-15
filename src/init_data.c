@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/22 13:29:09 by bfaure            #+#    #+#             */
-/*   Updated: 2023/03/15 09:34:18 by bfaure           ###   ########lyon.fr   */
+/*   Created: 2023/03/15 09:21:31 by bfaure            #+#    #+#             */
+/*   Updated: 2023/03/15 09:36:02 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#include "../header/pipex.h"
 
-typedef struct s_data
+void	init_data(t_data *data)
 {
-	int		pid1;
-	int		pid2;
-	int		fd[2];
-	char	**env;
-	char	*path;
-	char	**paths;
-	int		fd_infile;
-	int		fd_outfile;
-	char	*valid_paths;
-}	t_data;
-
-#endif
+	data->pid1 = 0;
+	data->pid2 = 0;
+	data->fd[0] = 0;
+	data->fd[1] = 0;
+	data->env = NULL;
+	data->path = NULL;
+	data->paths = NULL;
+	data->fd_infile = 0;
+	data->fd_outfile = 0;
+	data->valid_paths = NULL;
+}

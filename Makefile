@@ -6,7 +6,7 @@
 #    By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/22 10:53:15 by bfaure            #+#    #+#              #
-#    Updated: 2023/03/14 11:09:52 by bfaure           ###   ########lyon.fr    #
+#    Updated: 2023/03/15 09:28:24 by bfaure           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS			=	main.c\
 					parsing.c\
 					utils.c\
 					exec.c\
+					init_data.c\
 
 OBJS = ${SRCS:%.c=${DIR_OBJS}%.o}
 

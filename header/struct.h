@@ -6,7 +6,7 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:29:09 by bfaure            #+#    #+#             */
-/*   Updated: 2023/03/15 09:34:18 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/03/17 11:47:55 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 
 typedef struct s_data
 {
-	int		pid1;
-	int		pid2;
-	int		fd[2];
 	char	**env;
 	char	*path;
 	char	**paths;
+	char	*valid_paths;
+	int		pid1;
+	int		pid2;
+	int		fd[2];
 	int		fd_infile;
 	int		fd_outfile;
-	char	*valid_paths;
 }	t_data;
 
 #endif

@@ -6,7 +6,7 @@
 #    By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:23:52 by bfaure            #+#    #+#              #
-#    Updated: 2023/03/01 12:46:27 by bfaure           ###   ########lyon.fr    #
+#    Updated: 2023/03/17 10:47:00 by bfaure           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,7 @@ HEADERS	= 	libft.h\
 			get_next_line.h\
 			ft_printf.h\
 
-CFLAGS	= -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror
 
 all :		${NAME}
 

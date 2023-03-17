@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/22 16:03:43 by bfaure            #+#    #+#             */
-/*   Updated: 2023/03/15 09:58:16 by bfaure           ###   ########lyon.fr   */
+/*   Created: 2023/03/17 13:10:29 by bfaure            #+#    #+#             */
+/*   Updated: 2023/03/17 13:11:02 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,20 @@ void	check_open_file(char *infile, char *outfile, t_data *data)
 {
 	data->fd_infile = open(infile, O_RDONLY);
 	if (data->fd_infile == -1)
-	{
 		perror("ERROR\nCould not open infile");
-		exit(1);
-	}
 	data->fd_outfile = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (data->fd_outfile == -1)
 	{
 		perror("ERROR\nCould not open outfile");
 		exit(1);
 	}
+}
+
+void	close_fd(t_data *data)
+{
+	close(data->fd[0]);
+	close(data->fd[1]);
+	close(data->fd_infile);
+	close(data->fd_outfile);
+	return ;
 }

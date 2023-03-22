@@ -18,6 +18,7 @@ static void dup_cmd1(t_data *data)
 	{
 		free(data->valid_paths);
 		perror("ERROR\nCould not create dup");
+		close_fd(data);
 		exit(1);
 	}
 	else
@@ -26,6 +27,7 @@ static void dup_cmd1(t_data *data)
 	{
 		free(data->valid_paths);
 		perror("ERROR\nCould not create dup");
+		close_fd(data);
 		exit(1);
 	}
 	else
@@ -38,6 +40,7 @@ static void dup_cmd2(t_data *data)
 	{
 		free(data->valid_paths);
 		perror("ERROR\nCould not create dup");
+		close_fd(data);
 		exit(1);
 	}
 	else
@@ -47,6 +50,7 @@ static void dup_cmd2(t_data *data)
 		close(data->fd_outfile);
 		free(data->valid_paths);
 		perror("ERROR\nCould not create dup");
+		close_fd(data);
 		exit(1);
 	}
 	else
@@ -61,14 +65,17 @@ int exec(t_data *data, char **cmd, int k)
 		{
 			perror("ERROR\nCould not create the pipe\n");
 			free_tab(cmd);
+			close_fd(data);
 			exit(1);
 		}
 		data->pid1 = fork();
 		if (data->pid1 == 0)
 		{
 			if (data->fd[0])
-				close(data->fd[1]);
+				close(data->fd[0]);
+			ft_printf("test\n");
 			dup_cmd1(data);
+			close_fd(data);
 			execve(data->valid_paths, cmd, data->env);
 			call_perror(data);
 		}
@@ -77,9 +84,10 @@ int exec(t_data *data, char **cmd, int k)
 	data->pid2 = fork();
 	if (data->pid2 == 0)
 	{
-		if (data->fd[0])
-			close(data->fd[0]);
+		if (data->fd[1])
+			close(data->fd[1]);
 		dup_cmd2(data);
+		close_fd(data);
 		execve(data->valid_paths, cmd, data->env);
 		call_perror(data);
 	}

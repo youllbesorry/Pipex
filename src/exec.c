@@ -12,8 +12,16 @@
 
 #include "../header/pipex.h"
 
-static void	dup_cmd1(t_data *data)
+static void dup_cmd1(t_data *data)
 {
+	if (dup2(data->fd_infile, STDIN_FILENO) == -1)
+	{
+		free(data->valid_paths);
+		perror("ERROR\nCould not create dup");
+		exit(1);
+	}
+	else
+		close(data->fd_infile);
 	if (dup2(data->fd[1], STDOUT_FILENO) == -1)
 	{
 		free(data->valid_paths);
@@ -22,16 +30,9 @@ static void	dup_cmd1(t_data *data)
 	}
 	else
 		close(data->fd[1]);
-	if (dup2(data->fd_infile, STDIN_FILENO) == -1)
-	{
-		close(data->fd_infile);
-		free(data->valid_paths);
-		perror("ERROR\nCould not create dup");
-		exit(1);
-	}
 }
 
-static void	dup_cmd2(t_data *data)
+static void dup_cmd2(t_data *data)
 {
 	if (dup2(data->fd[0], STDIN_FILENO) == -1)
 	{
@@ -48,9 +49,11 @@ static void	dup_cmd2(t_data *data)
 		perror("ERROR\nCould not create dup");
 		exit(1);
 	}
+	else
+		close(data->fd_outfile);
 }
 
-int	exec(t_data *data, char **cmd, int k)
+int exec(t_data *data, char **cmd, int k)
 {
 	if (k == 0)
 	{
@@ -64,21 +67,23 @@ int	exec(t_data *data, char **cmd, int k)
 		if (data->pid1 == 0)
 		{
 			if (data->fd[0])
-				close(data->fd[0]);
+				close(data->fd[1]);
 			dup_cmd1(data);
 			execve(data->valid_paths, cmd, data->env);
+			call_perror(data);
 		}
-		waitpid(data->pid2, NULL, 0);
 		return (0);
 	}
 	data->pid2 = fork();
 	if (data->pid2 == 0)
 	{
-		if (data->fd[1])
-			close(data->fd[1]);
+		if (data->fd[0])
+			close(data->fd[0]);
 		dup_cmd2(data);
 		execve(data->valid_paths, cmd, data->env);
+		call_perror(data);
 	}
 	waitpid(data->pid1, NULL, 0);
+	waitpid(data->pid2, NULL, 0);
 	return (0);
 }

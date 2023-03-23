@@ -12,7 +12,7 @@
 
 #include "../header/pipex.h"
 
-static void dup_cmd1(t_data *data)
+static void	dup_cmd1(t_data *data)
 {
 	if (dup2(data->fd_infile, STDIN_FILENO) == -1)
 	{
@@ -34,7 +34,7 @@ static void dup_cmd1(t_data *data)
 		close(data->fd[1]);
 }
 
-static void dup_cmd2(t_data *data)
+static void	dup_cmd2(t_data *data)
 {
 	if (dup2(data->fd[0], STDIN_FILENO) == -1)
 	{
@@ -57,41 +57,75 @@ static void dup_cmd2(t_data *data)
 		close(data->fd_outfile);
 }
 
-int exec(t_data *data, char **cmd, int k)
+void	exec_cmd_1(t_data *data, char **argv, char **env)
 {
-	if (k == 0)
+	char	**cmd;
+	char	*valid_path;
+
+	if (data->fd[0])
+		close(data->fd[0]);
+	dup_cmd1(data);
+	cmd = ft_split(argv[3], ' ');
+	if (!cmd)
 	{
-		if (pipe(data->fd) == -1)
-		{
-			perror("ERROR\nCould not create the pipe\n");
-			free_tab(cmd);
-			close_fd(data);
-			exit(1);
-		}
-		data->pid1 = fork();
-		if (data->pid1 == 0)
-		{
-			if (data->fd[0])
-				close(data->fd[0]);
-			ft_printf("test\n");
-			dup_cmd1(data);
-			close_fd(data);
-			execve(data->valid_paths, cmd, data->env);
-			call_perror(data);
-		}
-		return (0);
+		close_fd(data);
+		return ;
+	}
+	valid_path = get_valid_paths(data, cmd);
+	if (!valid_path)
+	{
+		close_fd(data);
+		return ;
+	}
+	execve(valid_path, cmd, env);
+	call_perror(data);
+
+}
+
+void	exec_cmd_2(t_data *data, char **argv, char **env)
+{
+	char	**cmd;
+	char	*valid_path;
+
+	if (data->fd[1])
+		close(data->fd[1]);
+	dup_cmd2(data);
+	cmd = ft_split(argv[2], ' ');
+	if (!cmd)
+	{
+		close_fd(data);
+		return ;
+	}
+	valid_path = get_valid_paths(data, cmd);
+	if (!valid_path)
+	{
+		close_fd(data);
+		return ;
+	}
+	execve(valid_path, cmd, env);
+	call_perror(data);
+}
+
+int	exec(t_data *data, char **argv, char **env)
+{
+	if (pipe(data->fd) == -1)
+	{
+		perror("ERROR\nCould not create the pipe\n");
+		close_fd(data);
+		ft_printf("test0\n");
+		exit(1);
+	}
+	data->pid1 = fork();
+	if (data->pid1 == 0)
+	{
+		ft_printf("test\n");
+		exec_cmd_1(data, argv, env);
 	}
 	data->pid2 = fork();
 	if (data->pid2 == 0)
 	{
-		if (data->fd[1])
-			close(data->fd[1]);
-		dup_cmd2(data);
-		close_fd(data);
-		execve(data->valid_paths, cmd, data->env);
-		call_perror(data);
+		ft_printf("test1\n");
+		exec_cmd_2(data, argv, env);
 	}
-	waitpid(data->pid1, NULL, 0);
-	waitpid(data->pid2, NULL, 0);
 	return (0);
 }

@@ -6,56 +6,34 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:11:04 by bfaure            #+#    #+#             */
-/*   Updated: 2023/03/22 16:00:17 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/03/23 11:50:16 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/pipex.h"
 
-void	get_valid_paths(char **argv, t_data *data, size_t i, size_t j)
+char	*get_valid_paths(t_data *data, char **cmd)
 {
-	static int	k = 0;
 	char		*pathname;
-	char		**cmd;
-
-	cmd = ft_split(argv[j], ' ');
-	if (!cmd)
-		return ;
-	pathname = ft_strjoin(data->paths[i], cmd[0]);
-	if (!pathname)
-		return ;
-	if (access(pathname, F_OK) == 0 && k < 2)
-	{
-		data->valid_paths = ft_strdup(pathname);
-		if (!data->valid_paths)
-			return ;
-		ft_printf("valid_path = %s\n", data->valid_paths);
-		exec(data, cmd, k);
-		free(data->valid_paths);
-		k++;
-	}
-	free_tab(cmd);
-	free(pathname);
-	return ;
-}
-
-void	loop_on_paths(char **argv, t_data *data)
-{
-	size_t	i;
-	size_t	j;
+	size_t		i;
 
 	i = 0;
 	while (data->paths[i])
 	{
-		j = 1;
-		while (argv[j])
+		pathname = ft_strjoin(data->paths[i], cmd[0]);
+		// ft_printf("cmd = %s\n", cmd[0]);
+		// ft_printf("data->paths = %s\n", data->paths[i]);
+		if (!pathname)
+			return (NULL);
+		if (access(pathname, X_OK) == 0)
 		{
-			get_valid_paths(argv, data, i, j);
-			j++;
+			// ft_printf("valid_path = %s\n", pathname);
+			return (pathname);
 		}
 		i++;
 	}
-	return ;
+	free(pathname);
+	return (NULL);
 }
 
 void	get_cmb_path(t_data *data)
@@ -80,7 +58,7 @@ void	get_cmb_path(t_data *data)
 	return ;
 }
 
-void	get_path(char **env, char **argv, t_data *data)
+void	get_path(char **env, t_data *data)
 {
 	size_t	i;
 
@@ -99,7 +77,6 @@ void	get_path(char **env, char **argv, t_data *data)
 	if (!data->paths)
 		return ;
 	get_cmb_path(data);
-	loop_on_paths(argv, data);
 	if (!data->valid_paths)
 		return ;
 	ft_printf("Paths OK\n");

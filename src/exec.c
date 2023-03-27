@@ -120,7 +120,7 @@ void	exec_cmd_2(t_data *data, char **argv, char **env)
 
 int	exec(t_data *data, char **argv, char **env)
 {
-	if (pipe(data->fd) == -1)
+	if (pipe(data->fd) < 0)
 	{
 		perror("ERROR\nCould not create the pipe\n");
 		close_fd(data);
@@ -129,6 +129,7 @@ int	exec(t_data *data, char **argv, char **env)
 	data->pid1 = fork();
 	if (data->pid1 == 0)
 		exec_cmd_1(data, argv, env);
+	close(data->fd_infile);
 	data->pid2 = fork();
 	if (data->pid2 == 0)
 		exec_cmd_2(data, argv, env);

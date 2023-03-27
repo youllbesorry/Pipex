@@ -6,7 +6,7 @@
 #    By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/22 10:53:15 by bfaure            #+#    #+#              #
-#    Updated: 2023/03/23 14:12:00 by bfaure           ###   ########lyon.fr    #
+#    Updated: 2023/03/27 15:55:43 by bfaure           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ OBJS = ${SRCS:%.c=${DIR_OBJS}%.o}
 # ---- Compilation ---- #
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -g3
+CFLAGS	=	-Wall -Wextra -Werror -g3 -fsanitize=address
 
 # ---- Commands ---- #
 

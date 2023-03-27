@@ -6,7 +6,7 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:11:04 by bfaure            #+#    #+#             */
-/*   Updated: 2023/03/23 14:02:52 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/03/27 13:57:41 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*get_valid_paths(t_data *data, char **cmd)
 	size_t		i;
 
 	i = 0;
-	if (cmd && access(cmd[0], X_OK) == 0)
+	if (cmd[0] && access(cmd[0], X_OK) == 0)
 		return (cmd[0]);
 	while (data->paths[i])
 	{
@@ -57,24 +57,29 @@ void	get_cmb_path(t_data *data)
 
 void	get_path(char **env, t_data *data)
 {
-	size_t	i;
+	ssize_t	i;
 
-	i = 0;
-	while (env[i])
+	i = -1;
+	while (env[++i])
 	{
 		if (ft_strnstr(env[i], "PATH=", 5) != NULL)
 		{
 			data->path = ft_strnstr(env[i], "PATH=", 5);
 			break ;
 		}
-		i++;
+	}
+	if (!data->path)
+	{
+		close_fd(data);
+		exit(0);
 	}
 	data->path += 5;
 	data->paths = ft_split(data->path, ':');
 	if (!data->paths)
-		return ;
+	{
+		close_fd(data);
+		exit(0);
+	}
 	get_cmb_path(data);
-	if (!data->valid_paths)
-		return ;
 	return ;
 }

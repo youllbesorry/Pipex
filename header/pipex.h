@@ -6,7 +6,7 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 11:40:52 by bfaure            #+#    #+#             */
-/*   Updated: 2023/03/23 11:37:19 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/04/05 16:30:30 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <string.h>
 # include "../Libft/headers/libft.h"
 # include "../Libft/headers/ft_printf.h"
-# include "../Libft/headers/get_next_line.h"
 
 void	get_path(char **env, t_data *data);
 void	init_data(t_data *data);
@@ -33,7 +32,6 @@ int		exec(t_data *data, char **argv, char **env);
 void	close_fd(t_data *data);
 void	get_cmb_path(t_data *data);
 void	loop_on_paths(char **argv, t_data *data);
-void	call_perror(t_data *data);
 char	*get_valid_paths(t_data *data, char **cmd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:10:29 by bfaure            #+#    #+#             */
-/*   Updated: 2023/03/27 13:03:16 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/04/05 16:30:42 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,4 @@ void	close_fd(t_data *data)
 	if (data->fd_outfile)
 		close(data->fd_outfile);
 	return ;
-}
-
-void	call_perror(t_data *data)
-{
-	close_fd(data);
-	perror("execve");
-	exit (1);
 }

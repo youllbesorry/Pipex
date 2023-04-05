@@ -85,8 +85,8 @@ void	exec_cmd_1(t_data *data, char **argv, char **env)
 		ft_putstr_fd("ERROR\nCommand not 1 found\n", 2);
 		exit(1);
 	}
+	close_fd(data);
 	execve(valid_path, cmd, env);
-	call_perror(data);
 }
 
 void	exec_cmd_2(t_data *data, char **argv, char **env)
@@ -114,8 +114,8 @@ void	exec_cmd_2(t_data *data, char **argv, char **env)
 		ft_putstr_fd("ERROR\nCommand not 2 found\n", 2);
 		exit(1);
 	}
+	close_fd(data);
 	execve(valid_path, cmd, env);
-	call_perror(data);
 }
 
 int	exec(t_data *data, char **argv, char **env)

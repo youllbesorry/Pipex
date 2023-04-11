@@ -1,6 +1,7 @@
-src$
-test4$
-test5$
-blabla$
-toto$
-tata
+header
+infile
+Libft
+Makefile
+outfile
+pipex
+src

@@ -6,7 +6,7 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:21:31 by bfaure            #+#    #+#             */
-/*   Updated: 2023/03/15 09:36:02 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/04/11 18:46:38 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,4 @@ void	init_data(t_data *data)
 	data->paths = NULL;
 	data->fd_infile = 0;
 	data->fd_outfile = 0;
-	data->valid_paths = NULL;
 }

@@ -17,7 +17,6 @@ static void	dup_cmd1(t_data *data)
 	if (dup2(data->fd_infile, STDIN_FILENO) == -1)
 	{
 		close_fd(data);
-		free(data->valid_paths);
 		free_tab(data->paths);
 		perror("ERROR\nCould not create dup1 in");
 		exit(1);
@@ -27,7 +26,6 @@ static void	dup_cmd1(t_data *data)
 	if (dup2(data->fd[1], STDOUT_FILENO) == -1)
 	{
 		close_fd(data);
-		free(data->valid_paths);
 		free_tab(data->paths);
 		perror("ERROR\nCould not create dup1 out");
 		exit(1);
@@ -41,7 +39,6 @@ static void	dup_cmd2(t_data *data)
 	if (dup2(data->fd[0], STDIN_FILENO) == -1)
 	{
 		close_fd(data);
-		free(data->valid_paths);
 		free_tab(data->paths);
 		perror("ERROR\nCould not create dup2 in");
 		exit(1);
@@ -51,7 +48,6 @@ static void	dup_cmd2(t_data *data)
 	if (dup2(data->fd_outfile, STDOUT_FILENO) == -1)
 	{
 		close_fd(data);
-		free(data->valid_paths);
 		free_tab(data->paths);
 		perror("ERROR\nCould not create dup2 out");
 		exit(1);

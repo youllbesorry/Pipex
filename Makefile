@@ -6,7 +6,7 @@
 #    By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/22 10:53:15 by bfaure            #+#    #+#              #
-#    Updated: 2023/04/05 14:28:11 by bfaure           ###   ########lyon.fr    #
+#    Updated: 2023/04/11 18:52:33 by bfaure           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,6 @@ LIBFT_A = $(DIR_LIBFT)$(LIBFT)
 
 # ---- Files ---- #
 
-HEAD			=	header/pipex.h\
-
 SRCS			=	main.c\
 					parsing.c\
 					utils.c\
@@ -39,11 +37,13 @@ SRCS			=	main.c\
 					init_data.c\
 
 OBJS = ${SRCS:%.c=${DIR_OBJS}%.o}
+DEPS = ${SRCS:%.c=${DIR_OBJS}%.d}
 
 # ---- Compilation ---- #
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror
+DEPS_FLAGS = -MMD -MP
+CFLAGS	=	${DEPS_FLAGS} -Wall -Wextra -Werror
 
 # ---- Commands ---- #
 
@@ -67,7 +67,9 @@ ${NAME}	:	${OBJS}
 
 # ---- Compiled Rules ---- #
 
-${DIR_OBJS}%.o	:	${DIR_SRCS}%.c ${HEAD} $(LIBFT_A)
+-include ${DEPS}
+
+${DIR_OBJS}%.o	:	${DIR_SRCS}%.c $(LIBFT_A)
 					@${MKDIR} ${DIR_OBJS}
 					${CC} ${CFLAGS} -I $(DIR_LIBFT) -I. -c $< -o $@		
 

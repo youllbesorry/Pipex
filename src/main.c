@@ -6,7 +6,7 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 11:39:41 by bfaure            #+#    #+#             */
-/*   Updated: 2023/04/11 13:41:50 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/04/11 18:38:07 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ int	main(int argc, char **argv, char **env)
 		exit (0);
 	}
 	init_data(&data);
+	// int i;
+	// i = 0;
+	// while (env[i])
+	// {
+	// 	printf("env[%i] = %s\n", i, env[i]);
+	// 	i++;
+	// }
 	data.env = env;
 	check_open_file(argv[1], argv[argc - 1], &data);
 	get_path(env, &data);

@@ -6,7 +6,7 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 11:40:52 by bfaure            #+#    #+#             */
-/*   Updated: 2023/04/05 16:30:30 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/04/11 19:03:41 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "sys/wait.h"
 # include <fcntl.h>
 # include <errno.h>
-# include <unistd.h>
 # include <stdio.h>
 # include <string.h>
 # include "../Libft/headers/libft.h"

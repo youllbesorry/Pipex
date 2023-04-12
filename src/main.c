@@ -6,7 +6,7 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 11:39:41 by bfaure            #+#    #+#             */
-/*   Updated: 2023/04/12 13:55:21 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 15:05:46 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv, char **env)
 
 	if (argc != 5)
 	{
-		ft_printf("ERROR\nYou must give 5 arg to the program\n");
+		ft_printf(RED"ERROR\nYou must give 5 arg to the program\n"END);
 		exit (0);
 	}
 	init_data(&data);

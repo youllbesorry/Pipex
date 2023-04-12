@@ -6,12 +6,15 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 11:40:52 by bfaure            #+#    #+#             */
-/*   Updated: 2023/04/12 13:56:47 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 15:08:36 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
+
+# define END "\033[0m"
+# define RED "\033[1;31m"
 
 # include <fcntl.h>
 # include <errno.h>
@@ -21,6 +24,7 @@
 # include "sys/wait.h"
 # include "../Libft/headers/libft.h"
 # include "../Libft/headers/ft_printf.h"
+
 
 void	free_tab(char **tab);
 void	close_fd(t_data *data);

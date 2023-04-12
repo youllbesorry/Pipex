@@ -18,7 +18,7 @@ static void	dup_cmd1(t_data *data)
 	{
 		close_fd(data);
 		free_tab(data->paths);
-		perror("ERROR\nCould not create dup1 in");
+		perror(RED"ERROR\nCould not create dup1 in"END);
 		exit(1);
 	}
 	else
@@ -27,11 +27,12 @@ static void	dup_cmd1(t_data *data)
 	{
 		close_fd(data);
 		free_tab(data->paths);
-		perror("ERROR\nCould not create dup1 out");
+		perror(RED"ERROR\nCould not create dup1 out"END);
 		exit(1);
 	}
 	else
 		close(data->fd[1]);
+	return ;
 }
 
 static void	dup_cmd2(t_data *data)
@@ -40,7 +41,7 @@ static void	dup_cmd2(t_data *data)
 	{
 		close_fd(data);
 		free_tab(data->paths);
-		perror("ERROR\nCould not create dup2 in");
+		perror(RED"ERROR\nCould not create dup2 in"END);
 		exit(1);
 	}
 	else
@@ -49,11 +50,12 @@ static void	dup_cmd2(t_data *data)
 	{
 		close_fd(data);
 		free_tab(data->paths);
-		perror("ERROR\nCould not create dup2 out");
+		perror(RED"ERROR\nCould not create dup2 out"END);
 		exit(1);
 	}
 	else
 		close(data->fd_outfile);
+	return ;
 }
 
 void	exec_cmd_1(t_data *data, char **argv, char **env)
@@ -78,7 +80,7 @@ void	exec_cmd_1(t_data *data, char **argv, char **env)
 		close_fd(data);
 		free_tab(cmd);
 		free_tab(data->paths);
-		ft_putstr_fd("ERROR\nCommand not 1 found\n", 2);
+		ft_putstr_fd(RED"ERROR\nCommand not 1 found\n"END, 2);
 		exit(1);
 	}
 	close_fd(data);
@@ -107,7 +109,7 @@ void	exec_cmd_2(t_data *data, char **argv, char **env)
 		close_fd(data);
 		free_tab(cmd);
 		free_tab(data->paths);
-		ft_putstr_fd("ERROR\nCommand not 2 found\n", 2);
+		ft_putstr_fd(RED"ERROR\nCommand not 2 found\n"END, 2);
 		exit(1);
 	}
 	close_fd(data);
@@ -118,7 +120,7 @@ int	exec(t_data *data, char **argv, char **env)
 {
 	if (pipe(data->fd) < 0)
 	{
-		perror("ERROR\nCould not create the pipe\n");
+		perror(RED"ERROR\nCould not create the pipe\n"END);
 		close_fd(data);
 		exit(1);
 	}

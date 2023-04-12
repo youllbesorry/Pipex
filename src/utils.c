@@ -6,7 +6,7 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:10:29 by bfaure            #+#    #+#             */
-/*   Updated: 2023/04/11 16:00:12 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 15:06:18 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ void	check_open_file(char *infile, char *outfile, t_data *data)
 	data->fd_infile = open(infile, O_RDONLY);
 	if (data->fd_infile == -1)
 	{
-		perror("ERROR\nCould not open infile");
+		perror(RED"ERROR\nCould not open infile"END);
 		exit(0);
 	}
 	data->fd_outfile = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (data->fd_outfile == -1)
 	{
-		perror("ERROR\nCould not open outfile");
+		perror(RED"ERROR\nCould not open outfile"END);
 		close(data->fd_infile);
 		exit(0);
 	}

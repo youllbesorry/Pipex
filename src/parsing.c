@@ -6,7 +6,7 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:11:04 by bfaure            #+#    #+#             */
-/*   Updated: 2023/04/11 18:46:24 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 13:55:36 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*get_valid_paths(t_data *data, char **cmd)
 	return (NULL);
 }
 
-void	get_cmb_path(t_data *data)
+void	get_cmd_path(t_data *data)
 {
 	size_t	i;
 	size_t	nb_line;
@@ -87,6 +87,6 @@ void	get_path(char **env, t_data *data)
 		close_fd(data);
 		exit(0);
 	}
-	get_cmb_path(data);
+	get_cmd_path(data);
 	return ;
 }

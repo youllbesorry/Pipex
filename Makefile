@@ -6,7 +6,7 @@
 #    By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/22 10:53:15 by bfaure            #+#    #+#              #
-#    Updated: 2023/04/11 18:52:33 by bfaure           ###   ########lyon.fr    #
+#    Updated: 2023/04/12 13:57:42 by bfaure           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,12 +37,15 @@ SRCS			=	main.c\
 					init_data.c\
 
 OBJS = ${SRCS:%.c=${DIR_OBJS}%.o}
+
 DEPS = ${SRCS:%.c=${DIR_OBJS}%.d}
 
 # ---- Compilation ---- #
 
 CC		=	cc
+
 DEPS_FLAGS = -MMD -MP
+
 CFLAGS	=	${DEPS_FLAGS} -Wall -Wextra -Werror
 
 # ---- Commands ---- #

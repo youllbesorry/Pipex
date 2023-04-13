@@ -6,7 +6,7 @@
 #    By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/22 10:53:15 by bfaure            #+#    #+#              #
-#    Updated: 2023/04/12 13:57:42 by bfaure           ###   ########lyon.fr    #
+#    Updated: 2023/04/13 14:30:04 by bfaure           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ CC		=	cc
 
 DEPS_FLAGS = -MMD -MP
 
-CFLAGS	=	${DEPS_FLAGS} -Wall -Wextra -Werror
+CFLAGS	=	${DEPS_FLAGS} -Wall -Wextra -Werror -g3
 
 # ---- Commands ---- #
 

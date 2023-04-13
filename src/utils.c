@@ -6,7 +6,7 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:10:29 by bfaure            #+#    #+#             */
-/*   Updated: 2023/04/12 15:06:18 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/04/13 15:13:08 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,11 @@ void	free_tab(char **tab)
 	return ;
 }
 
-void	free_tab_error(char **tab, size_t len)
+void	free_and_close_all(t_data *data)
 {
-	size_t	i;
-
-	i = 0;
-	while (i < len)
-	{
-		free(tab[i]);
-		i++;
-	}
-	if (len != 0)
-		free(tab);
+	close_fd(data);
+	if (data->paths)
+		free_tab(data->paths);
 	return ;
 }
 
@@ -69,4 +62,12 @@ void	close_fd(t_data *data)
 	if (data->fd_outfile)
 		close(data->fd_outfile);
 	return ;
+}
+
+void	call_perror(t_data	*data, char **cmd)
+{
+	perror(RED"CMD"END);
+	free_tab(data->paths);
+	free_tab(cmd);
+	exit(1);
 }

@@ -6,7 +6,7 @@
 /*   By: bfaure <bfaure@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:11:04 by bfaure            #+#    #+#             */
-/*   Updated: 2023/04/12 17:06:13 by bfaure           ###   ########lyon.fr   */
+/*   Updated: 2023/04/13 13:01:03 by bfaure           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ char	*get_valid_paths(t_data *data, char **cmd)
 {
 	char		*pathname;
 	size_t		i;
-	//int			fd_cmd;
 
 	i = 0;
 	if (cmd[0] && access(cmd[0], X_OK) == 0)

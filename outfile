@@ -1,8 +1,7 @@
-cat$
-header$
-infile$
-Libft$
-Makefile$
-outfile$
-pipex$
-src$
+Libft
+Makefile
+header
+infile
+outfile
+pipex
+src

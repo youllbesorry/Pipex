@@ -12,60 +12,61 @@
 
 #include "../header/pipex.h"
 
-static void	dup_cmd1(t_data *data)
+static int	dup_cmd1(t_data *data)
 {
 	if (dup2(data->fd_infile, STDIN_FILENO) == -1)
 	{
-		close_fd(data);
-		free_tab(data->paths);
-		perror(RED"ERROR\nCould not create dup1 in"END);
-		exit(1);
+		// close_fd(data);
+		// free_tab(data->paths);
+		//perror(RED"ERROR\nCould not create dup1 in"END);
+		return (-1);
 	}
 	else
 		close(data->fd_infile);
 	if (dup2(data->fd[1], STDOUT_FILENO) == -1)
 	{
-		close_fd(data);
-		free_tab(data->paths);
-		perror(RED"ERROR\nCould not create dup1 out"END);
-		exit(1);
+		// close_fd(data);
+		// free_tab(data->paths);
+		//perror(RED"ERROR\nCould not create dup1 out"END);
+		return (-1);
 	}
 	else
 		close(data->fd[1]);
-	return ;
+	return (0);
 }
 
-static void	dup_cmd2(t_data *data)
+static int	dup_cmd2(t_data *data)
 {
 	if (dup2(data->fd[0], STDIN_FILENO) == -1)
 	{
-		close_fd(data);
-		free_tab(data->paths);
-		perror(RED"ERROR\nCould not create dup2 in"END);
-		exit(1);
+		// close_fd(data);
+		// free_tab(data->paths);
+		//perror(RED"ERROR\nCould not create dup2 in"END);
+		return (-1);
 	}
 	else
 		close(data->fd[0]);
 	if (dup2(data->fd_outfile, STDOUT_FILENO) == -1)
 	{
-		close_fd(data);
-		free_tab(data->paths);
-		perror(RED"ERROR\nCould not create dup2 out"END);
-		exit(1);
+		// close_fd(data);
+		// free_tab(data->paths);
+		//perror(RED"ERROR\nCould not create dup2 out"END);
+		return (-1);
 	}
 	else
 		close(data->fd_outfile);
-	return ;
+	return (0);
 }
 
 void	exec_cmd_1(t_data *data, char **argv, char **env)
 {
 	char	**cmd;
 	char	*valid_path;
+	int		dup;
 
 	if (data->fd[0])
 		close(data->fd[0]);
-	dup_cmd1(data);
+	dup = dup_cmd1(data);
 	cmd = ft_split(argv[2], ' ');
 	if (!cmd)
 	{
@@ -75,7 +76,7 @@ void	exec_cmd_1(t_data *data, char **argv, char **env)
 		exit(1);
 	}
 	valid_path = get_valid_paths(data, cmd);
-	if (!valid_path)
+	if (!valid_path || dup == -1)
 	{
 		close_fd(data);
 		free_tab(cmd);
@@ -91,10 +92,11 @@ void	exec_cmd_2(t_data *data, char **argv, char **env)
 {
 	char	**cmd;
 	char	*valid_path;
+	int		dup;
 
 	if (data->fd[1])
 		close(data->fd[1]);
-	dup_cmd2(data);
+	dup = dup_cmd2(data);
 	cmd = ft_split(argv[3], ' ');
 	if (!cmd)
 	{
@@ -104,7 +106,7 @@ void	exec_cmd_2(t_data *data, char **argv, char **env)
 		exit(1);
 	}
 	valid_path = get_valid_paths(data, cmd);
-	if (!valid_path)
+	if (!valid_path || dup == -1)
 	{
 		close_fd(data);
 		free_tab(cmd);
